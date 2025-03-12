@@ -1,0 +1,19 @@
+{
+  "name": "parcel-boilerplate",
+  "version": "1.0.0",
+  "author": "Frida Jansson",
+  "license": "ISC",
+  "description": "En boilerplate för webbutveckling med HTML, CSS, JS och Parcel",
+  "browserslist": "> 0.5%, last 2 versions, not dead",
+  "source": "src/index.html",
+  "scripts": {
+    "start": "parcel --no-hmr --open",
+    "build": "parcel build"
+  },
+  "devDependencies": {
+    "parcel": "^2.13.3",
+    "sharp": "^0.33.5",
+    "jsdoc": "^4.0.4",
+    "@parcel/transformer-sass": "^2.13.3"
+  }
+}
