@@ -82,7 +82,7 @@ function fetchWeather(location) {
                             <p><strong>Plats:</strong> ${location}</p>
                             <p><strong>Temperatur:</strong> ${weatherData.current_weather.temperature} °C</p>
                             <p><strong>Väder:</strong> ${weatherDescription}</p>
-                            <i class="wi ${weatherIconClass} weather-icon"></i>
+                            <em class="wi ${weatherIconClass} weather-icon"></em>
                         `;
                     })
                     .catch(error => console.error('Error:', error));
