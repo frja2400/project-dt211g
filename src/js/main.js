@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     //Hämtar sökknapp och adderar händelselyssnare som anropar funktionen fetchWeatherAndMap vid klick.
     document.getElementById('searchButton').addEventListener('click', fetchWeatherAndMap);
-    
+
     //Anropar funktionen initializeMap för att visa kartan när HTML har laddats. 
     initializeMap();
 
@@ -40,7 +40,7 @@ function initializeMap() {
 //Funktion för att hämta väder och uppdatera karta baserat på angiven plats. 
 function fetchWeatherAndMap() {
     const location = document.getElementById('locationInput').value; //Hämtar sökplats
-    
+
     //Anropar två funktioner med den angivna platsen som argument. 
     fetchWeather(location);
     searchLocation(location);
@@ -131,31 +131,31 @@ function getWeatherDescription(code) {
 function getWeatherIconClass(code) {
     //Objekt som mappar väderkoder till CSS-klasser för väderikoner. 
     const iconClasses = {
-        0: "wi-day-sunny",
-        1: "wi-day-sunny-overcast",
-        2: "wi-day-cloudy",
-        3: "wi-cloudy",
-        45: "wi-fog",
-        48: "wi-fog",
-        51: "wi-sprinkle",
-        53: "wi-sprinkle",
-        55: "wi-sprinkle",
-        56: "wi-sprinkle",
-        57: "wi-sprinkle",
-        61: "wi-rain",
-        63: "wi-rain",
-        65: "wi-rain",
-        66: "wi-rain",
-        67: "wi-rain",
-        71: "wi-snow",
-        73: "wi-snow",
-        75: "wi-snow",
-        77: "wi-snow",
-        80: "wi-showers",
-        81: "wi-showers",
-        82: "wi-showers",
-        85: "wi-snow",
-        86: "wi-snow"
+        0: "wi-day-sunny spin",
+        1: "wi-day-sunny-overcast pulse",
+        2: "wi-day-cloudy pulse",
+        3: "wi-cloudy slowMove",
+        45: "wi-fog slowMove",
+        48: "wi-fog slowMove",
+        51: "wi-sprinkle shake",
+        53: "wi-sprinkle shake",
+        55: "wi-sprinkle shake",
+        56: "wi-sprinkle shake",
+        57: "wi-sprinkle shake",
+        61: "wi-rain bounce",
+        63: "wi-rain bounce",
+        65: "wi-rain bounce",
+        66: "wi-rain bounce",
+        67: "wi-rain bounce",
+        71: "wi-snow shake",
+        73: "wi-snow shake",
+        75: "wi-snow shake",
+        77: "wi-snow shake",
+        80: "wi-showers bounce",
+        81: "wi-showers bounce",
+        82: "wi-showers bounce",
+        85: "wi-snow shake",
+        86: "wi-snow shake"
     };
 
     return iconClasses[code] || "wi-na";
