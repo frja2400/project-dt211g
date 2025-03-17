@@ -7,7 +7,9 @@ body {
     align-items: center;
     min-height: 100vh;
     margin: 0 auto;
+    text-align: center;
     overflow-x: hidden;
+    background-color: #B7B1F2;
 }
 
 main {
@@ -15,6 +17,8 @@ main {
     padding: 2%;
     width: 100%;
     max-width: 1000px;
+    background-color: #FFDCCC;
+    border-radius: 20px;
 }
 
 p {
@@ -22,13 +26,25 @@ p {
 }
 
 footer p {
-    text-align: center;
+    line-height: 1.0em;
 }
 
 #map {
-    height: 500px;
+    height: 450px;
+    width: 100%;
+    margin-top: 30px;
 }
 
 .weather-icon {
     font-size: 50px;
+    margin-top: 10px;
 }
+
+input {
+    margin-top: 20px;
+}
+
+button {
+    cursor: pointer;
+}
+
