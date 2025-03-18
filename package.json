@@ -9,7 +9,7 @@
   "scripts": {
     "start": "parcel --no-hmr --open",
     "build": "parcel build",
-    "docs": "jsdoc src -d docs"
+    "docs": "npx jsdoc src/js -d docs"
   },
   "devDependencies": {
     "parcel": "^2.13.3",
