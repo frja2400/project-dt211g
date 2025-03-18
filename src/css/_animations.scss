@@ -1,14 +1,17 @@
+/*Skapar en roterande effekt*/
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
 
+/*Skapar en pulserande effekt genom att göra objektets skala 110%.*/
 @keyframes pulse {
     0% { transform: scale(1); }
     50% { transform: scale(1.1); }
     100% { transform: scale(1); }
 }
 
+/*Studsande effekt genom att flytta objektet uppåt 10px och tillbaka.*/
 @keyframes bounce {
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(-10px); }
@@ -26,6 +29,7 @@
     animation: bounce 2s infinite;
 }
 
+/*Flyttar objektet horisontellt fram och tillbaka.*/
 @keyframes shake {
     0%, 100% { transform: translateX(0); }
     25% { transform: translateX(-5px); }
@@ -37,6 +41,7 @@
     animation: shake 2s ease-in-out infinite;
 }
 
+/*Flyttar objektet långsamt upp och ned.*/
 @keyframes slowMove {
     0% { transform: translateY(0); }
     50% { transform: translateY(-5px); }
