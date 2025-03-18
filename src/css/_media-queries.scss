@@ -1,0 +1,33 @@
+@use "base" as *;
+
+@include respond-to(medium) {
+    .icon-line em {
+        font-size: 30px;
+    }
+    main {
+        padding-top: 30px;
+    }
+    .icon-line {
+        margin-top: 10px;
+    }
+}
+
+@include respond-to(small) {
+    .icon-line em {
+        margin: 0 20px;
+    }
+    #map {
+        margin-bottom: 10px;
+    }
+    main {
+        width: 100%;
+        border-radius: 0;
+        box-shadow: none;
+    }
+}
+
+@include respond-to(smaller) {
+    .icon-line em {
+        font-size: 21px;
+    }
+}
