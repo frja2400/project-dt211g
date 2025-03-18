@@ -1,15 +1,15 @@
 "use strict";
 
-//En händelselyssnare som körs när hela HTML har laddats. 
+//En händelselyssnare som körs när hela HTML har laddats.
 document.addEventListener('DOMContentLoaded', () => {
 
-    //Hämtar sökknapp och adderar händelselyssnare som anropar funktionen fetchWeatherAndMap vid klick.
+    //Hämtar sökknapp och lägger till en händelselyssnare som anropar funktionen fetchWeatherAndMap vid klick.
     document.getElementById('searchButton').addEventListener('click', fetchWeatherAndMap);
 
-    //Anropar funktionen initializeMap för att visa kartan när HTML har laddats. 
+    //Anropar funktionen initializeMap för att visa kartan när HTML har laddats.
     initializeMap();
 
-    //Händelselyssnare för input-fält som kör fetchWeatherAndMap vid tryck av enter. 
+    //Händelselyssnare för input-fält som kör fetchWeatherAndMap vid tryck av enter.
     const locationInput = document.getElementById('locationInput');
     if (locationInput) {
         locationInput.addEventListener('keydown', function (event) {
@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     } else {
-        console.error('Element with ID locationInput not found.');
+        console.error('Element med ID locationInput hittades inte.');
     }
 });
 
@@ -26,8 +26,9 @@ document.addEventListener('DOMContentLoaded', () => {
 let map;
 let marker;
 
-
-//Funktion för att hämta karta med leaflet. Sätter koordinatorer och zoomnivå. 
+/**
+ * Initialiserar kartan med Leaflet, sätter koordinater och zoomnivå.
+ */
 function initializeMap() {
     map = L.map('map').setView([60.0, 18.0], 5);
 
@@ -37,16 +38,21 @@ function initializeMap() {
     }).addTo(map);
 }
 
-//Funktion för att hämta väder och uppdatera karta baserat på angiven plats. 
+/**
+ * Hämtar väderdata och uppdaterar kartan baserat på den angivna platsen.
+ */
 function fetchWeatherAndMap() {
     const location = document.getElementById('locationInput').value; //Hämtar sökplats
 
-    //Anropar två funktioner med den angivna platsen som argument. 
+    //Anropar två funktioner med den angivna platsen som argument.
     fetchWeather(location);
     searchLocation(location);
 }
 
-//Funktion som hämtar väder baserat på den angivna platsen.
+/**
+ * Hämtar väderdata baserat på den angivna platsen.
+ * @param {string} location - Platsen att hämta väderdata för.
+ */
 function fetchWeather(location) {
 
     //Lagra URL som hämtar lon och lat från Nominatim baserat på angiven plats.
@@ -57,12 +63,12 @@ function fetchWeather(location) {
         .then(response => response.json())
         .then(data => {
 
-            //Kontrollera om det finns data och hämta lat och lon från svaret. 
+            //Kontrollera om det finns data och hämta lat och lon från svaret.
             if (data.length > 0) {
                 const lat = data[0].lat;
                 const lon = data[0].lon;
 
-                //Lagra URL som hämtar väderdata från Open Meteo API. 
+                //Lagra URL som hämtar väderdata från Open Meteo API.
                 const weatherUrl = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true`;
 
                 //AJAX-anrop till Open Meteo.
@@ -72,12 +78,12 @@ function fetchWeather(location) {
                         const weatherContainer = document.getElementById('weatherContainer');
                         //Hämta väderkod
                         const weatherCode = weatherData.current_weather.weathercode;
-                        //Anropa funktion som översätter väderkod till beskrivande text. 
+                        //Anropa funktion som översätter väderkod till beskrivande text.
                         const weatherDescription = getWeatherDescription(weatherCode);
-                        //Anropa funktion som översätter väderkod till ikoner. 
+                        //Anropa funktion som översätter väderkod till ikoner.
                         const weatherIconClass = getWeatherIconClass(weatherCode);
 
-                        //Manipluera DOM och uppdatera med plats, temperatur, väder och ikon.
+                        //Manipulera DOM och uppdatera med plats, temperatur, väder och ikon.
                         weatherContainer.innerHTML = `
                             <p><strong>Plats:</strong> ${location}</p>
                             <p><strong>Temperatur:</strong> ${weatherData.current_weather.temperature} °C</p>
@@ -85,15 +91,19 @@ function fetchWeather(location) {
                             <em class="wi ${weatherIconClass} weather-icon"></em>
                         `;
                     })
-                    .catch(error => console.error('Error:', error));
+                    .catch(error => console.error('Fel:', error));
             } else {
-                console.error('Location not found.');
+                console.error('Plats hittades inte.');
             }
         })
-        .catch(error => console.error('Error:', error));
+        .catch(error => console.error('Fel:', error));
 }
 
-//Funktion som översätter väderkod till beskrivande text. 
+/**
+ * Översätter väderkod till beskrivande text.
+ * @param {number} code - Väderkoden att översätta.
+ * @returns {string} Den beskrivande texten för väderkoden.
+ */
 function getWeatherDescription(code) {
     //Skapar ett objekt som mappar väderkoder till text.
     const descriptions = {
@@ -127,9 +137,13 @@ function getWeatherDescription(code) {
     return descriptions[code] || "Okänt väder";
 }
 
-//Funktion som översätter väderkod till ikoner
+/**
+ * Översätter väderkod till ikonklasser.
+ * @param {number} code - Väderkoden att översätta.
+ * @returns {string} CSS-klassen för väderikonen.
+ */
 function getWeatherIconClass(code) {
-    //Objekt som mappar väderkoder till CSS-klasser för väderikoner. 
+    //Objekt som mappar väderkoder till CSS-klasser för väderikoner.
     const iconClasses = {
         0: "wi-day-sunny spin",
         1: "wi-day-sunny-overcast pulse",
@@ -161,7 +175,10 @@ function getWeatherIconClass(code) {
     return iconClasses[code] || "wi-na";
 }
 
-//Sökfunktion som uppdaterar kartan baserat på sökt plats. 
+/**
+ * Söker efter en plats och uppdaterar kartan baserat på sökresultatet.
+ * @param {string} location - Platsen att söka efter.
+ */
 function searchLocation(location) {
     const geocoderUrl = `https://nominatim.openstreetmap.org/search?format=json&q=${location}`;
 
@@ -173,12 +190,12 @@ function searchLocation(location) {
                 const lon = data[0].lon;
                 map.setView([lat, lon], 14);
 
-                //Ta bort markör om det finns på kartan. 
+                //Ta bort markör om det finns på kartan.
                 if (marker) {
                     map.removeLayer(marker);
                 }
 
-                //Skapar ny markör med en popup som visar koordinater och namn. 
+                //Skapar ny markör med en popup som visar koordinater och namn.
                 marker = L.marker([lat, lon]).addTo(map)
                     .bindPopup(`<b>${location}</b><br>Lat: ${lat}, Lon: ${lon}`)
                     .openPopup();
@@ -186,5 +203,5 @@ function searchLocation(location) {
                 alert('Plats inte hittad');
             }
         })
-        .catch(error => console.error('Error:', error));
+        .catch(error => console.error('Fel:', error));
 }

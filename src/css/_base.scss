@@ -1,11 +1,46 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 
 @mixin respond-to($breakpoint) {
-    @if $breakpoint == medium {
-        @media (max-width: 1130px) {@content;}
-    } @else if $breakpoint == small {
-        @media (max-width: 590px) {@content;}
-    } @else if $breakpoint == smaller {
-        @media (max-width: 370px) {@content;}
+    @if $breakpoint ==medium {
+        @media (max-width: 1130px) {
+            @content;
+        }
     }
+
+    @else if $breakpoint ==small {
+        @media (max-width: 590px) {
+            @content;
+        }
+    }
+
+    @else if $breakpoint ==smaller {
+        @media (max-width: 370px) {
+            @content;
+        }
+    }
+}
+
+@mixin flex-center {
+    display: flex;
+    align-items: center;
+}
+
+$primary-color: #B7B1F2;
+$secondary-color: #FFDCCC;
+
+$darken-color: darken($primary-color, 25%);
+$darkest-color: darken($primary-color, 55%);
+
+$base-font: 'Roboto', Helvetica, sans-serif;
+$base-line-height: 1.7em;
+$footer-line-height: 1.0em;
+
+%button-style {
+    cursor: pointer;
+    border-radius: 5px;
+    padding: 5 10px;
+    border: none;
+    background-color: $darken-color;
+    color: white;
+    margin-left: 5px;
 }

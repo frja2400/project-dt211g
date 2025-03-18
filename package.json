@@ -8,7 +8,8 @@
   "source": "src/index.html",
   "scripts": {
     "start": "parcel --no-hmr --open",
-    "build": "parcel build"
+    "build": "parcel build",
+    "docs": "jsdoc src -d docs"
   },
   "devDependencies": {
     "parcel": "^2.13.3",
