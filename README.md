@@ -9,4 +9,5 @@ Detta Parcel-projekt är en optimerad webbapplikation som använder olika webbtj
 * Weather Icons som används för att hämta väderikoner baserat på väderkoden.
 
 **Dokumentation**
+
 Genererad dokumentation finns i docs-mappen. Kommentarer med JSDoc finns i JavaScript-koden. 
